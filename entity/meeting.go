@@ -10,6 +10,7 @@ import (
 
 type Meeting struct {
   pr []string
+  spon string
   st string
   et string
   title string
@@ -46,6 +47,14 @@ func (meeting Meeting) GetStartTime() string {
 func (meeting Meeting) SetStartTime() (st string) {
   meeting.st = st
 }
+
+func (meeting Meeting) GetSponsor() string{
+  return spon
+} 
+
+func (meeting Meeting) SetSponsor(sp string) {
+  meeting.spon = sp
+} 
 
 func (meeting Meeting) GetEndTime() string {
   return meeting.et
@@ -88,10 +97,11 @@ func (meeting Meeting) DeleteParticipator(un string) {
   }
 }
 
-func (meeting Meeting)  AddParticipator(un string) bool {
+func (meeting Meeting) AddParticipator(un string) bool {
+  // if time not overlap
   var i int
   var flag bool
-  flag= true
+  flag = true
   num := len(meeting.pr)
   for i= 0; i< num; i++ {
     if strings.EqualFold(meeting.pr[i], un) == true {
@@ -106,3 +116,6 @@ func (meeting Meeting)  AddParticipator(un string) bool {
   }
   return false
 }
+
+
+
